@@ -32,7 +32,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.removeListener = firebase.auth().onAuthStateChanged((user) => {
-      if(user) {
+      if (user) {
         this.setState({ authed: true});
       } else {
         this.setState({ authed: false });
@@ -40,7 +40,7 @@ class App extends React.Component {
     });
   }
 
-  componentWillMount() {
+  componentWillUnmount() {
     this.removeListener();
   }
 
