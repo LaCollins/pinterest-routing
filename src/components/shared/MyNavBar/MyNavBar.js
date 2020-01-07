@@ -1,29 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
 class MyNavBar extends React.Component {
+  static propTypes = {
+    authed: PropTypes.bool,
+  }
+
   logMeOut = (e) => {
     e.preventDefault();
     firebase.auth().signOut();
   }
 
   render() {
-    const {authed} = this.props;
+    const { authed } = this.props;
     return (
       <div className="MyNavBar">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-          <a class="navbar-brand" href="/">Pinterest</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <a className="navbar-brand" href="/">Pinterest</a>
 
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul className="navbar-nav mr-auto mt-2 mt-lg-0"></ul>
-            <div class="my-2 mt-lg-0">
+            <div className="my-2 mt-lg-0">
               {authed && (<button className="nav-links btn btn-dark" onClick={this.logMeOut}>Logout</button>)}
             </div>
-          </div>
         </nav>
       </div>
     );
