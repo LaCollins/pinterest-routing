@@ -1,5 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import boardShape from '../../../helpers/propz/boardShape';
 
 import './Board.scss';
@@ -19,6 +20,9 @@ class Board extends React.Component {
             <h5 className="card-title">{board.name}</h5>
             <p className="card-text">{board.description}</p>
           </div>
+            <div className="card-footer">
+              <Link className="btn btn-dark" to={`/board/${board.id}`}>View Board</Link>
+            </div>
         </div>
       </div>
     );
