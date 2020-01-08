@@ -17,7 +17,7 @@ class MyNavBar extends React.Component {
     const { authed } = this.props;
     return (
       <div className="MyNavBar">
-        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-between">
           <a className="navbar-brand" href="/">Pinterest</a>
 
             <div className="my-2 mt-lg-0">
