@@ -2,8 +2,11 @@
   display: block;
 }
 
-.card {
-  border-radius: 1em;
-  background-color: darkgray;
-  border: black solid 3px;
+.Board {
+  .card {
+    border-radius: 1em;
+    background-color: darkgray;
+    border: black solid 3px;
+    height: 200px;
+  }
 }
