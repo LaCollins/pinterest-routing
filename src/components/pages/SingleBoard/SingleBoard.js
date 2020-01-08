@@ -19,7 +19,7 @@ class SingleBoard extends React.Component {
       .catch((error) => console.error('err from single board', error));
   }
 
-  getBoardData = () => {
+  componentDidMount() {
     const { boardId } = this.props.match.params;
 
     boardData.getSingleBoard(boardId)
@@ -30,13 +30,11 @@ class SingleBoard extends React.Component {
       .catch((error) => console.error('err from single board', error));
   }
 
-  componentDidMount() {
-    this.getBoardData();
-  }
-
   deletePin = (pinId) => {
+    const { boardId } = this.props.match.params;
+
     pinData.deletePin(pinId)
-      .then(() => this.getBoardData())
+      .then(() => this.getPinData(boardId))
       .catch((error) => console.error('err from single board', error));
   }
 
