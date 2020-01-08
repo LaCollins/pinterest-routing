@@ -25,7 +25,7 @@ class Board extends React.Component {
         <div className="card">
           <div className="card-body">
             <div className="d-flex justify-content-end">
-              <button className="btn btn-danger m-0" onClick={this.deleteBoardEvent}>X</button>
+              <button className="btn btn-danger m-0 close" onClick={this.deleteBoardEvent}>X</button>
             </div>
             <h5 className="card-title m-0">{board.name}</h5>
             <p className="card-text">{board.description}</p>

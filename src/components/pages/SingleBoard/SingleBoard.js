@@ -19,7 +19,7 @@ class SingleBoard extends React.Component {
       .catch((error) => console.error('err from single board', error));
   }
 
-  componentDidMount() {
+  getBoardData = () => {
     const { boardId } = this.props.match.params;
 
     boardData.getSingleBoard(boardId)
@@ -27,6 +27,16 @@ class SingleBoard extends React.Component {
         this.setState({ board: response.data });
         this.getPinData(boardId);
       })
+      .catch((error) => console.error('err from single board', error));
+  }
+
+  componentDidMount() {
+    this.getBoardData();
+  }
+
+  deletePin = (pinId) => {
+    pinData.deletePin(pinId)
+      .then(() => this.getBoardData())
       .catch((error) => console.error('err from single board', error));
   }
 
@@ -38,7 +48,7 @@ class SingleBoard extends React.Component {
         <h1>{board.name}</h1>
         <h2>{board.description}</h2>
         <div className="pins container d-flex flex-wrap justify-content-center mt-3">
-          {pins.map((pin) => <Pin key={pinData.id} pin={pin} />)}
+          {pins.map((pin) => <Pin key={pinData.id} pin={pin} deletePin={this.deletePin}/>)}
         </div>
       </div>
     );
