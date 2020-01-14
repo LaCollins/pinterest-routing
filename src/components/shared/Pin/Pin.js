@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Pin.scss';
 import PropTypes from 'prop-types';
 
@@ -28,6 +29,9 @@ class Pin extends React.Component {
             </div>
             <h5 className="card-title">{pin.title}</h5>
             <img className="card-img" src={pin.imageUrl} alt={pin.title} />
+          </div>
+          <div className="card-footer">
+            <Link className="btn btn-dark" to={`/board/${pin.boardId}/pin/${pin.id}/edit`}>Edit</Link>
           </div>
         </div>
       </div>

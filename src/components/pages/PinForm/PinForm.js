@@ -9,6 +9,19 @@ class PinForm extends React.Component {
     pinUrl: '',
   }
 
+  componentDidMount() {
+    const { pinId } = this.props.match.params;
+    if (pinId) {
+      pinData.getSinglePin(pinId)
+        .then((request) => {
+          const pin = request.data;
+          this.setState({ pinTitle: pin.title });
+          this.setState({ pinUrl: pin.imageUrl });
+        })
+        .catch((error) => console.error('error from pin', error));
+    }
+  }
+
   titleChange = (e) => {
     e.preventDefault();
     this.setState({ pinTitle: e.target.value });
@@ -33,8 +46,24 @@ class PinForm extends React.Component {
       .catch((error) => console.error('err from save pin event', error));
   }
 
+  editPinEvent = (e) => {
+    e.preventDefault();
+    const { boardId } = this.props.match.params;
+    const { pinId } = this.props.match.params;
+    const updatedPin = {
+      title: this.state.pinTitle,
+      imageUrl: this.state.pinUrl,
+      uid: authData.getUid(),
+      boardId,
+    };
+    pinData.updatePin(pinId, updatedPin)
+      .then(() => this.props.history.push(`/board/${boardId}`))
+      .catch((error) => console.error('err from edit pin event', error));
+  }
+
   render() {
     const { pinTitle, pinUrl } = this.state;
+    const { pinId } = this.props.match.params;
 
     return (
       <form className="PinForm">
@@ -60,7 +89,11 @@ class PinForm extends React.Component {
             >
             </input>
         </div>
-        <button className="btn btn-dark" onClick={this.savePinEvent}>Save Pin</button>
+        {
+          pinId
+            ? (<button className="btn btn-dark" onClick={this.editPinEvent}>Edit Pin</button>)
+            : (<button className="btn btn-dark" onClick={this.savePinEvent}>Save Pin</button>)
+        }
       </form>
     );
   }
