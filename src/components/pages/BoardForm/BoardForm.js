@@ -1,6 +1,8 @@
 import React from 'react';
 
 import './BoardForm.scss';
+import authData from '../../../helpers/data/authData';
+import boardData from '../../../helpers/data/boardData';
 
 class BoardForm extends React.Component {
   state = {
@@ -13,8 +15,25 @@ class BoardForm extends React.Component {
     this.setState({ boardName: e.target.value });
   }
 
+  descriptionChange = (e) => {
+    e.preventDefault();
+    this.setState({ boardDescription: e.target.value });
+  }
+
+  saveBoardEvent = (e) => {
+    e.preventDefault();
+    const newBoard = {
+      name: this.state.boardName,
+      description: this.state.boardDescription,
+      uid: authData.getUid(),
+    };
+    boardData.saveBoard(newBoard)
+      .then(() => this.props.history.push('/'))
+      .catch((error) => console.error('err from save board', error));
+  }
+
   render() {
-    const { boardName } = this.state;
+    const { boardName, boardDescription } = this.state;
     return (
       <form className="BoardForm">
         <div className="form-group">
@@ -28,8 +47,18 @@ class BoardForm extends React.Component {
             onChange={this.nameChange}
             >
           </input>
+          <label htmlFor="board-description">Board Description</label>
+          <input
+            type="text"
+            className="form-control col-4 m-auto"
+            id="board-description"
+            placeholder="Enter board description"
+            value={boardDescription}
+            onChange={this.descriptionChange}
+            >
+            </input>
         </div>
-        <button className="btn btn-dark">Save Board</button>
+        <button className="btn btn-dark" onClick={this.saveBoardEvent}>Save Board</button>
       </form>
     );
   }
