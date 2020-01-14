@@ -22,7 +22,7 @@ class Board extends React.Component {
 
     return (
       <div className="Board col-4">
-        <div className="card">
+        <div className="card m-2">
           <div className="card-body">
             <div className="d-flex justify-content-end">
               <button className="btn btn-danger m-0 close" onClick={this.deleteBoardEvent}>X</button>
@@ -31,7 +31,8 @@ class Board extends React.Component {
             <p className="card-text">{board.description}</p>
           </div>
             <div className="card-footer">
-              <Link className="btn btn-dark" to={`/board/${board.id}`}>View Board</Link>
+              <Link className="btn btn-dark m-2" to={`/board/${board.id}`}>View Board</Link>
+              <Link className="btn btn-dark m-2" to={`/board/${board.id}/edit`}>Edit Board</Link>
             </div>
         </div>
       </div>
