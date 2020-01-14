@@ -46,7 +46,7 @@ class SingleBoard extends React.Component {
         <h1>{board.name}</h1>
         <h2>{board.description}</h2>
         <div className="pins container d-flex flex-wrap justify-content-center mt-3">
-          {pins.map((pin) => <Pin key={pinData.id} pin={pin} deletePin={this.deletePin}/>)}
+          {pins.map((pin) => <Pin key={pin.id} pin={pin} deletePin={this.deletePin}/>)}
         </div>
       </div>
     );
